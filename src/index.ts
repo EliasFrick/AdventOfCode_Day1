@@ -9,22 +9,53 @@ export default function Main() {
 
     const splittedLines = InputFile.split("\n")
 
-    const result: any = [];
+    const result: any[][]= [];
+
+    let endResult = 0;
+
+    let firstNumber =  false;
+
+    let numberPlace = 0;
+
+    for (let i = 0; i < splittedLines.length; i++) {
+        result[i] = [];
+    }
+    
 
     //x = Line
     //y = Char
     for (let x = 0; x < splittedLines.length; x++) {
         for (let y = 0; y < splittedLines[x].length; y++) {
             if (parseInt(splittedLines[x][y])) {
-                console.log(splittedLines[x][y])
-                result[y] = splittedLines[x][y]
+                if (!result[x][numberPlace] && firstNumber === false) {
+                    //console.log(splittedLines[x][y])
+                    result[x][numberPlace] = splittedLines[x][y]
+                    numberPlace++;
+                    firstNumber = true
+                }
+                if (firstNumber) {
+                    //console.log(splittedLines[x][y])
+                    result[x][numberPlace] = splittedLines[x][y]
+                }
+                if (splittedLines[x].length === y) {
+                    result[x][1] = result[x][0]
+                }
             }
         }
+        numberPlace = 0;
+        firstNumber = false
     }
 
-    // console.log(_.isNumber(splittedLines[0][5]))
-    // console.log(parseInt(splittedLines[0][5]))
-    // console.log(_.isNumber(5))
+    let calculator 
+
+    //calculate result
+    for (let i = 0; i < splittedLines.length; i++) {
+        calculator = result[i][0].concat(result[i][1].toString())
+        endResult = endResult + Number(calculator)
+        //endResult = endResult + Number(result[i][0]) + Number(result[i][1])
+    }
+
+    console.log(endResult)
 }
 
 Main();
