@@ -52,7 +52,6 @@ export default function Main() {
     for (let i = 0; i < splittedLines.length; i++) {
         calculator = result[i][0].concat(result[i][1].toString())
         endResult = endResult + Number(calculator)
-        //endResult = endResult + Number(result[i][0]) + Number(result[i][1])
     }
 
     console.log(endResult)
